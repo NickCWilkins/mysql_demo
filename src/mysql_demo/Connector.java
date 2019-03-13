@@ -16,10 +16,10 @@ import java.util.Properties;
  */
 public class Connector {
     //Configuration parameters for the generation of the IAM Database Authentication token
-  private static final String RDS_INSTANCE_HOSTNAME = "meal-planner-db.cmivgxwwxvol.us-east-2.rds.amazonaws.com";
+  private static final String RDS_INSTANCE_HOSTNAME = "q68u8b2buodpme2n.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
   private static final int RDS_INSTANCE_PORT = 3306;
-  private static final String REGION_NAME = "us-east-2a";
-  private static final String DB_USER = "master";
+  private static final String DB_USER = "dufjcgoj84idkv1v";
+  private static final String USER_PASS = "n0wvk18i1po7dubv";
   private static final String JDBC_URL = "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME + ":" + RDS_INSTANCE_PORT;
 
   private static final String SSL_CERTIFICATE = "rds-combined-ca-bundle.pem";
@@ -43,7 +43,7 @@ public class Connector {
   public static void createDBConnection() throws Exception {
     setSslProperties();
     connection = DriverManager.getConnection(JDBC_URL, setMySqlConnectionProperties());
-    connection.setCatalog("meal_planner_db");
+    connection.setCatalog("lgghmk6nvkong10c");
   }
 
   /**
@@ -56,7 +56,7 @@ public class Connector {
     mysqlConnectionProperties.setProperty("verifyServerCertificate","true");
     mysqlConnectionProperties.setProperty("useSSL", "true");
     mysqlConnectionProperties.setProperty("user", DB_USER);
-    mysqlConnectionProperties.setProperty("password", System.getenv("MYSQL_PASSWORD"));
+    mysqlConnectionProperties.setProperty("password", USER_PASS);
     return mysqlConnectionProperties;
   }
 

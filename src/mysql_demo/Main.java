@@ -1,21 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mysql_demo;
 
-/**
- *
- * @author nwilki3
- */
-public class Main {
+import java.sql.*;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
+      try {
+        Connector.createDBConnection();
+      } catch(Exception ex) {
+        System.out.println("Error setting up database connection. Exiting.");
+        ex.printStackTrace();
+        System.exit(-1);
+      }
+
+      Connection conn = Connector.getConnection();
+
+      //Example usage, log all users in database
+      //users def: fname VARCHAR(20), lname VARCHAR(20), email varchar(100)
+      try {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+
+        while (rs.next()) {
+          String fname = rs.getString("fname");
+          String lname = rs.getString("lname");
+          String email = rs.getString("email");
+
+          System.out.printf("First Name: %s\nLastName: %s\nEmail: %s\n", fname, lname, email);
+        }
+      } catch (SQLException ex) {
+        ex.printStackTrace();
+      }
+
     }
     
 }
